@@ -1,12 +1,18 @@
-package de.uni_mannheim.desq.examples.readme
+package de.uni_mannheim.desq.examples.movies
 
 import de.uni_mannheim.desq.dictionary._
 import de.uni_mannheim.desq.mining.spark._
 import org.apache.spark.{SparkConf, SparkContext}
 
-object DesqExampleWithDictionaryAdvanced {
+object MoviesWithDictionaryAdvanced {
 
   def main(args: Array[String]) {
+    val datasetFname = args(0)
+
+    val patternExpression = args(1)
+
+    val minimumSupport = args(2).toInt
+
     implicit val sc = new SparkContext(new SparkConf().setAppName(getClass.getName).setMaster("local"))
 
     // read the dictionary
@@ -16,8 +22,6 @@ object DesqExampleWithDictionaryAdvanced {
     val data = DesqDataset.loadFromDelFile("data/readme/sequences.del", dictionary).recomputeDictionary()
 
     // create a Miner
-    val patternExpression = "PERSON (.*) CITY"
-    val minimumSupport = 2
     val properties = DesqCount.createConf(patternExpression, minimumSupport)
     val miner = DesqMiner.create(new DesqMinerContext(properties))
 
