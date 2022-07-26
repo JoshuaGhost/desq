@@ -16,3 +16,4 @@
 /.ensime
 /.ensime_cache
 jar/*
+*.swp
