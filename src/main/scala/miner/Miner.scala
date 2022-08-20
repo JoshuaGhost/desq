@@ -1,32 +1,30 @@
-package de.uni_mannheim.desq.examples.movies
+package miner
 
-import de.uni_mannheim.desq.mining.spark._
+import de.uni_mannheim.desq.mining.spark.{DesqCount, DesqDataset, DesqMiner, DesqMinerContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Movies {
+object Miner {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val datasetFname = args(0)
-    val datasetPath = datasetFname.slice(0, datasetFname.lastIndexOf("/"))
-//    val tempFname = datasetPath + "/sequences.del"
 
     val patternExpression = args(1)
+    System.out.println(patternExpression.getClass)
+    System.out.println(patternExpression)
+    System.out.println("[lives](.)".getClass)
+    System.out.println("[lives](.)")
 
     val minimumSupport = args(2).toInt
 
-    implicit val sc = new SparkContext(new SparkConf().setAppName(getClass.getName).setMaster("local"))
-
     // read the data
+    implicit val sc: SparkContext = new SparkContext(new SparkConf().setAppName(getClass.getName).setMaster("local"))
     // val sequences = sc.textFile("data-local/partial_movie_docs/sequences.txt")
     val sequences = sc.textFile(datasetFname)
 
     // convert data into DESQ's internal format (DesqDataset)
     val data = DesqDataset.buildFromStrings(sequences.map(s => s.split("\\s+")))
 
-//    data.save(datasetPath)
-
     // create a Miner
-    // val patternExpression = "(....)"
     val properties = DesqCount.createConf(patternExpression, minimumSupport)
     val miner = DesqMiner.create(new DesqMinerContext(properties))
 

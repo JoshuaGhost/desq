@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.uni_mannheim</groupId>
 	<artifactId>desq</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -96,7 +96,7 @@
 	<build>
 		<!-- final artifact name -->
 		<!--<finalName>${project.artifactId}-${git.branch}-${timestamp}</finalName>-->
-		<finalName>${project.artifactId}-${git.branch}</finalName>
+		<finalName>${project.artifactId}-${suffix}</finalName>
 
 		<plugins>
 			<!-- Git information -->
@@ -226,7 +226,7 @@
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 					<!--<finalName>${project.artifactId}-${git.branch}-${timestamp}-${suffix}</finalName>-->
-					<finalName>${project.artifactId}-${git.branch}-${suffix}</finalName>
+					<finalName>${project.artifactId}-${suffix}</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
@@ -273,7 +273,7 @@
 						</relocation>
 					</relocations>
 					<!--<finalName>${project.artifactId}-${git.branch}-${timestamp}-${suffix}</finalName>-->
-					<finalName>${project.artifactId}-${git.branch}-${suffix}</finalName>
+					<finalName>${project.artifactId}-${suffix}</finalName>
 				</configuration>
 				<executions>
 					<execution>
