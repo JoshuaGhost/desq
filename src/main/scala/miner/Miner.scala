@@ -9,10 +9,6 @@ object Miner {
     val datasetFname = args(0)
 
     val patternExpression = args(1)
-    System.out.println(patternExpression.getClass)
-    System.out.println(patternExpression)
-    System.out.println("[lives](.)".getClass)
-    System.out.println("[lives](.)")
 
     val minimumSupport = args(2).toInt
 

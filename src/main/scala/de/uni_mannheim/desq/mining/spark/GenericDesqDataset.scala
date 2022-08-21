@@ -172,10 +172,7 @@ class GenericDesqDataset[T](val sequences: RDD[T], val descriptor: DesqDescripto
   def print(maxSequences: Int = -1): Unit = {
     val strings = toSidsWeightPairs().map(s => {
       val sidString = s._1.deep.mkString("[", " ", "]")
-      if (s._2 == 1)
-        sidString
-      else
-        sidString + "@" + s._2
+      sidString + "@" + s._2
     })
     if (maxSequences < 0)
       strings.collect().foreach(println)
